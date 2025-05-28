@@ -4,14 +4,53 @@ import { NextRequest } from "next/server";
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const size = searchParams.get("size");
+  const link = searchParams.get("url");
 
-  const res = await fetch(
-    "https://www.topperzstore.nl/new-era-chicago-white-sox-59-years-chrome-satin-brim-two-tone-edition-59fifty-fitted-hat/NES6263-8"
-  );
-  const html = await res.text();
+  if (!size) {
+    return new Response(JSON.stringify({ error: "Size was not passed" }), {
+      headers: { "Content-Type": "application/json" },
+      status: 500,
+    });
+  }
 
-  const dom = new JSDOM(html);
-  const document = dom.window.document;
+  if (!link) {
+    return new Response(JSON.stringify({ error: "Link was not passed" }), {
+      headers: { "Content-Type": "application/json" },
+      status: 500,
+    });
+  }
+
+  let document = null;
+
+  try {
+    const res = await fetch(link);
+    const html = await res.text();
+
+    const dom = new JSDOM(html);
+    document = dom.window.document;
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        error: "Errored while checking web address",
+      }),
+      {
+        headers: { "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
+  }
+
+  if (document === null) {
+    return new Response(
+      JSON.stringify({
+        error: "Errored while checking web address",
+      }),
+      {
+        headers: { "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
+  }
 
   const sizeParents = document.querySelectorAll(
     ".product-detail-configurator-option"
