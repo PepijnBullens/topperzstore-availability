@@ -19,3 +19,9 @@ model User {
   username String @unique
   password String
 }
+
+model Link {
+  id Int @id @default(autoincrement())
+  url String @unique
+  dateAdded DateTime @default(now())
+}
