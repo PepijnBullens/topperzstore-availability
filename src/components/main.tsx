@@ -2,7 +2,7 @@
 
 import CheckButton from "@/components/check-button";
 import type { Link } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Main({ links }: { links: Link[] }) {
   const [content, setContent] = useState<{ available: boolean; error: string }>(
@@ -11,10 +11,6 @@ export default function Main({ links }: { links: Link[] }) {
   const [size, setSize] = useState<string>("");
 
   const [pending, setPending] = useState<boolean>(false);
-
-  useEffect(() => {
-    console.log(content);
-  }, [content]);
 
   return (
     <main>
@@ -39,8 +35,8 @@ export default function Main({ links }: { links: Link[] }) {
         }
       />
 
-      {links.map((link, index) => (
-        <article key={index}>
+      {links.map((link) => (
+        <article key={link.id}>
           <img src={link.image} alt={`Image of ${link.name}`} />
           <a href={link.url} target="_blank">
             Check product

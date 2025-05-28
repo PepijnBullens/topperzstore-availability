@@ -1,64 +1,59 @@
 "use client";
 
 import { useState } from "react";
+import { Link } from "@prisma/client";
 
-export default function AddItemForm() {
-  const [form, setForm] = useState<{ link: string }>({ link: "" });
-  const [status, setStatus] = useState<{
-    pending: boolean;
+export default function AddItemForm({
+  setPending,
+  setContent,
+}: {
+  setPending: (state: boolean) => void;
+  setContent: (content: {
+    links: Link[] | null;
     error: string;
     success: string;
-  }>({
-    pending: false,
-    error: "",
-    success: "",
-  });
+  }) => void;
+}) {
+  const [form, setForm] = useState<{ link: string }>({ link: "" });
 
   const onSubmit = async () => {
     if (form.link === "") return;
 
-    setStatus((prev) => ({ ...prev, pending: true }));
+    setPending(true);
 
     const response = await fetch(`/api/add-item?link=${form.link}`);
     const result = await response.json();
 
-    if (result) {
-      setStatus((prev) => ({ ...prev, pending: false }));
-    }
+    setContent({
+      links: result.links,
+      error: result.error || "",
+      success: result.success || "",
+    });
 
-    setStatus((prev) => ({
-      ...prev,
-      error: result.error,
-      success: result.success,
-    }));
+    setPending(false);
   };
 
   return (
-    <>
-      <p className="text-red-600">{status.error}</p>
-      <p className="text-green-600">{status.success}</p>
-      {status.pending && <p>PENDING</p>}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}
-      >
-        <label htmlFor="link">Add link to topperzstore.nl item</label>
-        <input
-          type="text"
-          name="link"
-          id="link"
-          value={form.link}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setForm((prev) => ({
-              ...prev,
-              link: e.target.value,
-            }))
-          }
-        />
-        <button type="submit">submit</button>
-      </form>
-    </>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit();
+      }}
+    >
+      <label htmlFor="link">Add link to topperzstore.nl item</label>
+      <input
+        type="text"
+        name="link"
+        id="link"
+        value={form.link}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setForm((prev) => ({
+            ...prev,
+            link: e.target.value,
+          }))
+        }
+      />
+      <button type="submit">submit</button>
+    </form>
   );
 }

@@ -163,8 +163,14 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  const links = await db.link.findMany();
+
   return new Response(
-    JSON.stringify({ error: "", success: "Successfully added your link" }),
+    JSON.stringify({
+      links: links,
+      error: "",
+      success: "Successfully added your link",
+    }),
     {
       headers: { "Content-Type": "application/json" },
       status: 200,
