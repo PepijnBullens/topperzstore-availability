@@ -1,10 +1,24 @@
 import { db } from "@/lib/db";
 import { JSDOM } from "jsdom";
 import { NextRequest } from "next/server";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 
 export async function GET(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user) {
+    return new Response(
+      JSON.stringify({ error: "You are not authorized", success: "" }),
+      {
+        headers: { "Content-Type": "application/json" },
+        status: 401,
+      }
+    );
+  }
+
   const searchParams = request.nextUrl.searchParams;
-  const link = searchParams.get("link"); // e.g. `/api/search?query=hello`
+  const link = searchParams.get("link");
 
   if (!link) {
     return new Response(

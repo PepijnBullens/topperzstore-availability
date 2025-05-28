@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const size = searchParams.get("size"); // e.g. `/api/search?query=hello`
+  const size = searchParams.get("size");
 
   const res = await fetch(
     "https://www.topperzstore.nl/new-era-chicago-white-sox-59-years-chrome-satin-brim-two-tone-edition-59fifty-fitted-hat/NES6263-8"
