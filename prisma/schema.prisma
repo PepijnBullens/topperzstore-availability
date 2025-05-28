@@ -23,5 +23,8 @@ model User {
 model Link {
   id Int @id @default(autoincrement())
   url String @unique
+  name String
+  price String
+  image String
   dateAdded DateTime @default(now())
 }

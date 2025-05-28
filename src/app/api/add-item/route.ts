@@ -30,11 +30,14 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  let html;
+  let document = null;
 
   try {
     const res = await fetch(link);
-    html = await res.text();
+    const html = await res.text();
+
+    const dom = new JSDOM(html);
+    document = dom.window.document;
   } catch (error) {
     return new Response(
       JSON.stringify({
@@ -48,8 +51,18 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const dom = new JSDOM(html);
-  const document = dom.window.document;
+  if (document === null) {
+    return new Response(
+      JSON.stringify({
+        error: "Errored while checking web address",
+        success: "",
+      }),
+      {
+        headers: { "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
+  }
 
   const sizeParents = document.querySelectorAll(
     ".product-detail-configurator-option"
@@ -85,9 +98,55 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  const name = document.querySelector(".product-detail-name")?.textContent;
+  if (!name) {
+    return new Response(
+      JSON.stringify({
+        error: "Could not fetch the product name from the link",
+        success: "",
+      }),
+      {
+        headers: { "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
+  }
+
+  const price = document.querySelector(".product-detail-price")?.textContent;
+  if (!price) {
+    return new Response(
+      JSON.stringify({
+        error: "Could not fetch the product price from the link",
+        success: "",
+      }),
+      {
+        headers: { "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
+  }
+
+  const ogImageMeta = document.querySelector('meta[property="og:image"]');
+  const src = ogImageMeta?.getAttribute("content");
+  if (!src) {
+    return new Response(
+      JSON.stringify({
+        error: "Could not fetch the product image from the link",
+        success: "",
+      }),
+      {
+        headers: { "Content-Type": "application/json" },
+        status: 500,
+      }
+    );
+  }
+
   const newLink = await db.link?.create({
     data: {
       url: link,
+      name: name,
+      price: price,
+      image: src,
     },
   });
 
