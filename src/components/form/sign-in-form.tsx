@@ -11,6 +11,7 @@ const SignInForm = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState<string>("");
 
   const onSubmit = async () => {
     const signInData = await signIn("credentials", {
@@ -20,45 +21,53 @@ const SignInForm = () => {
     });
 
     if (!signInData?.ok) {
-      console.error("Error while trying to sign in");
+      setError("Sign in failed");
     } else {
       router.push("/admin");
     }
   };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmit();
-      }}
-    >
-      <input
-        type="email"
-        name="email"
-        placeholder="admin@admin.com"
-        value={form.email}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setForm((prev) => ({
-            ...prev,
-            email: e.target.value,
-          }))
-        }
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="password"
-        value={form.password}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setForm((prev) => ({
-            ...prev,
-            password: e.target.value,
-          }))
-        }
-      />
-      <button type="submit">Sign in</button>
-    </form>
+    <main className="w-screen h-screen flex justify-center items-center">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit();
+        }}
+        className="flex flex-col gap-4 bg-[#ededed] rounded-md p-4"
+      >
+        <input
+          type="email"
+          name="email"
+          placeholder="admin@admin.com"
+          value={form.email}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setForm((prev) => ({
+              ...prev,
+              email: e.target.value,
+            }))
+          }
+          className="input"
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          value={form.password}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setForm((prev) => ({
+              ...prev,
+              password: e.target.value,
+            }))
+          }
+          className="input"
+        />
+        <p className="color-red">{error}</p>
+        <button type="submit" className="button">
+          Sign in
+        </button>
+      </form>
+    </main>
   );
 };
 

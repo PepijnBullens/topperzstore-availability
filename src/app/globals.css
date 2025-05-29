@@ -60,3 +60,10 @@ th {
 .button:hover {
   opacity: 0.8; /* hover:opacity-80 */
 }
+
+.input {
+  height: 2.5rem;
+  border-bottom: lightgray 1px solid;
+  color: black;
+  outline: none;
+}
