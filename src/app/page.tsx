@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Main from "@/components/main";
 import { db } from "@/lib/db";
 
