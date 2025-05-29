@@ -35,16 +35,18 @@ export default function AddItemForm({
 
   return (
     <form
+      className="flex gap-2"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();
       }}
     >
-      <label htmlFor="link">Add link to topperzstore.nl item</label>
       <input
+        className="bg-black text-white rounded-md px-4 py-2 placeholder:text-white"
         type="text"
         name="link"
         id="link"
+        placeholder="New link to product..."
         value={form.link}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setForm((prev) => ({
@@ -53,7 +55,12 @@ export default function AddItemForm({
           }))
         }
       />
-      <button type="submit">submit</button>
+      <button
+        className="bg-black text-white rounded-md px-4 py-2 uppercase font-bold cursor-pointer hover:opacity-80 transition"
+        type="submit"
+      >
+        ADD
+      </button>
     </form>
   );
 }

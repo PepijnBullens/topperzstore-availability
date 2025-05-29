@@ -20,12 +20,15 @@ export default function RemoveButton({
 
     const response = await fetch(`/api/remove-item?id=${id}`);
     const result = await response.json();
-    console.log(result);
 
     setContent({ links: result.links, error: result.error || "", success: "" });
 
     setPending(false);
   };
 
-  return <button onClick={remove}>remove</button>;
+  return (
+    <button className="button background-red" onClick={remove}>
+      remove
+    </button>
+  );
 }

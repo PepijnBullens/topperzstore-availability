@@ -1,1 +1,62 @@
 @import "tailwindcss";
+
+:root {
+  --red: #d72638;
+}
+
+@font-face {
+  font-family: "satoshi";
+  src: url("/satoshi.ttf");
+}
+
+.satoshi {
+  font-family: "satoshi";
+}
+
+th {
+  text-align: left;
+  padding: 0.5rem 0;
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  padding: 0.5rem;
+}
+
+td,
+th {
+  padding: 1rem 1.5rem;
+}
+
+.button {
+  height: 2.5rem; /* h-12 */
+  width: fit-content; /* w-fit */
+  display: flex; /* flex */
+  justify-content: center; /* justify-center */
+  align-items: center; /* items-center */
+  background-color: #000; /* bg-black */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem; /* px-4 */
+  padding-top: 0.5rem; /* py-2 */
+  padding-bottom: 0.5rem; /* py-2 */
+  color: #fff; /* text-white */
+  border-radius: 0.375rem; /* rounded-md */
+  cursor: pointer; /* cursor-pointer */
+  font-weight: bold; /* font-bold */
+  transition: opacity 0.2s; /* transition */
+}
+
+.color-red {
+  color: var(--red);
+}
+
+.background-red {
+  background-color: var(--red);
+}
+
+.button:hover {
+  opacity: 0.8; /* hover:opacity-80 */
+}

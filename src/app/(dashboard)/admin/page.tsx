@@ -8,10 +8,7 @@ export default async function AdminPage() {
   const links = await db.link.findMany();
 
   return session?.user ? (
-    <>
-      <p>Welcome {session?.user.username}</p>
-      <Admin links={links} />
-    </>
+    <Admin links={links} />
   ) : (
     <h2>Please sign in to view this page</h2>
   );
