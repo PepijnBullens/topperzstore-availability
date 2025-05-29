@@ -35,14 +35,14 @@ export default function AddItemForm({
 
   return (
     <form
-      className="flex gap-2"
+      className="flex gap-2 md:w-auto w-full"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();
       }}
     >
       <input
-        className="bg-black text-white rounded-md px-4 py-2 placeholder:text-white"
+        className="bg-black text-white rounded-md px-4 py-2 placeholder:text-white md:w-auto w-full"
         type="text"
         name="link"
         id="link"

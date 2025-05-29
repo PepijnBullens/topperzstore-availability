@@ -28,7 +28,7 @@ const SignInForm = () => {
   };
 
   return (
-    <main className="w-screen h-screen flex justify-center items-center">
+    <main className="w-[calc(100vw-4rem)] h-[calc(100vh-4rem)] flex justify-center items-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();

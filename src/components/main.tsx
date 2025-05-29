@@ -36,30 +36,24 @@ export default function Main({ links }: { links: Link[] }) {
         </section>
       )}
 
-      <table>
-        <thead className="border-b-1 border-[#777777]">
-          <tr>
-            <th className="px-8">Preview</th>
-            <th className="px-8">Name</th>
-            <th className="px-8">Price</th>
-            <th className="px-8">Availability</th>
-            <th className="px-8">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {links.map((link) => (
-            <TableRecord key={link.name} link={link} setError={setError} />
-          ))}
-        </tbody>
-      </table>
-
-      {/* <h2
-        style={{
-          color: content.available ? "green" : "red",
-        }}
-      >
-        AVAILABLE
-      </h2> */}
+      <div className="w-[calc(100vw-2rem)] overflow-scroll">
+        <table>
+          <thead className="border-b-1 border-[#777777]">
+            <tr>
+              <th className="px-8">Preview</th>
+              <th className="px-8">Name</th>
+              <th className="px-8">Price</th>
+              <th className="px-8">Availability</th>
+              <th className="px-8">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {links.map((link) => (
+              <TableRecord key={link.name} link={link} setError={setError} />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </main>
   );
 }

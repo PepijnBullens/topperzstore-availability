@@ -34,9 +34,9 @@ export default function Admin({ links }: { links: PrismaLink[] }) {
 
   return (
     <main>
-      <nav className="w-full flex justify-between mb-12">
+      <nav className="w-full flex md:flex-row flex-col gap-2 md:gap-0 justify-between mb-12">
         <div className="flex gap-2">
-          <Link href="/" className="button">
+          <Link href="/" className="button md:w-auto w-1/2">
             Back
           </Link>
           <SignOutButton />
@@ -58,46 +58,48 @@ export default function Admin({ links }: { links: PrismaLink[] }) {
         </section>
       )}
 
-      <table>
-        <thead className="border-b-1 border-[#777777]">
-          <tr>
-            <th className="px-8">Preview</th>
-            <th className="px-8">Name</th>
-            <th className="px-8">Price</th>
-            <th className="px-8">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {(content.links !== null ? content.links : links)?.map((link) => (
-            <tr key={link.id} className="border-b-1 border-[#777777]">
-              <td className="px-8 w-0">
-                <Image
-                  width={100}
-                  height={60}
-                  src={link.image}
-                  alt={`Image of product: ${link.name}`}
-                />
-              </td>
-              <td className="px-8 text-nowrap max-w-[200px] overflow-ellipsis overflow-hidden">
-                {link.name}
-              </td>
-              <td className="px-8 text-nowrap max-w-[200px] overflow-ellipsis overflow-hidden">
-                {link.price}
-              </td>
-              <td className="px-8 flex gap-2">
-                <a target="_blank" href={link.url} className="button">
-                  View Product
-                </a>
-                <RemoveButton
-                  id={link.id}
-                  setPending={setPending}
-                  setContent={setContent}
-                />
-              </td>
+      <div className="w-[calc(100vw-2rem)] overflow-scroll">
+        <table>
+          <thead className="border-b-1 border-[#777777]">
+            <tr>
+              <th className="px-8">Preview</th>
+              <th className="px-8">Name</th>
+              <th className="px-8">Price</th>
+              <th className="px-8">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {(content.links !== null ? content.links : links)?.map((link) => (
+              <tr key={link.id} className="border-b-1 border-[#777777]">
+                <td className="px-8 w-0">
+                  <Image
+                    width={100}
+                    height={60}
+                    src={link.image}
+                    alt={`Image of product: ${link.name}`}
+                  />
+                </td>
+                <td className="px-8 text-nowrap max-w-[200px] overflow-ellipsis overflow-hidden">
+                  {link.name}
+                </td>
+                <td className="px-8 text-nowrap max-w-[200px] overflow-ellipsis overflow-hidden">
+                  {link.price}
+                </td>
+                <td className="px-8 flex gap-2">
+                  <a target="_blank" href={link.url} className="button">
+                    View Product
+                  </a>
+                  <RemoveButton
+                    id={link.id}
+                    setPending={setPending}
+                    setContent={setContent}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </main>
   );
 }

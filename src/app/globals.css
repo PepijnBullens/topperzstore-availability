@@ -33,8 +33,8 @@ th {
 }
 
 .button {
+  text-wrap: nowrap;
   height: 2.5rem;
-  width: fit-content; /* w-fit */
   display: flex; /* flex */
   justify-content: center; /* justify-center */
   align-items: center; /* items-center */
@@ -75,7 +75,6 @@ th {
 
 .input-alt {
   height: 2.5rem;
-  width: fit-content; /* w-fit */
   display: flex; /* flex */
   justify-content: center; /* justify-center */
   align-items: center; /* items-center */
