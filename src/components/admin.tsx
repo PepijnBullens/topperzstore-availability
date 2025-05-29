@@ -78,10 +78,10 @@ export default function Admin({ links }: { links: PrismaLink[] }) {
                   alt={`Image of product: ${link.name}`}
                 />
               </td>
-              <td className="px-8 text-nowrap max-w-[100px] overflow-ellipsis overflow-hidden">
+              <td className="px-8 text-nowrap max-w-[200px] overflow-ellipsis overflow-hidden">
                 {link.name}
               </td>
-              <td className="px-8 text-nowrap max-w-[100px] overflow-ellipsis overflow-hidden">
+              <td className="px-8 text-nowrap max-w-[200px] overflow-ellipsis overflow-hidden">
                 {link.price}
               </td>
               <td className="px-8 flex gap-2">

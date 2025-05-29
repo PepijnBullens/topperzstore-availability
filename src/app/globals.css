@@ -2,6 +2,7 @@
 
 :root {
   --red: #d72638;
+  --green: #56e39f;
 }
 
 @font-face {
@@ -32,7 +33,7 @@ th {
 }
 
 .button {
-  height: 2.5rem; /* h-12 */
+  height: 2.5rem;
   width: fit-content; /* w-fit */
   display: flex; /* flex */
   justify-content: center; /* justify-center */
@@ -53,6 +54,10 @@ th {
   color: var(--red);
 }
 
+.color-green {
+  color: var(--green);
+}
+
 .background-red {
   background-color: var(--red);
 }
@@ -66,4 +71,25 @@ th {
   border-bottom: lightgray 1px solid;
   color: black;
   outline: none;
+}
+
+.input-alt {
+  height: 2.5rem;
+  width: fit-content; /* w-fit */
+  display: flex; /* flex */
+  justify-content: center; /* justify-center */
+  align-items: center; /* items-center */
+  background-color: #000; /* bg-black */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem; /* px-4 */
+  padding-top: 0.5rem; /* py-2 */
+  padding-bottom: 0.5rem; /* py-2 */
+  color: #fff; /* text-white */
+  border-radius: 0.375rem; /* rounded-md */
+  outline: none;
+  font-weight: bold;
+}
+
+.input-alt::placeholder {
+  color: white;
 }
