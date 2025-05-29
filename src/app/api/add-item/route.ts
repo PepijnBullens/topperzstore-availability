@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
 
     const dom = new JSDOM(html);
     document = dom.window.document;
-  } catch (error) {
+  } catch {
     return new Response(
       JSON.stringify({
         error: "Errored while checking web address",

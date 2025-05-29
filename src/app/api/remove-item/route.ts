@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import { JSDOM } from "jsdom";
 import { NextRequest } from "next/server";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
@@ -58,7 +57,7 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const deleteLink = await db.link.delete({
+  await db.link.delete({
     where: {
       id: existingLink.id,
     },
