@@ -34,7 +34,7 @@ const SignInForm = () => {
           e.preventDefault();
           onSubmit();
         }}
-        className="flex flex-col gap-4 bg-[#ededed] rounded-md p-4"
+        className="flex flex-col gap-4 bg-[#ededed] rounded-md p-4 min-w-[400px]"
       >
         <input
           type="email"
