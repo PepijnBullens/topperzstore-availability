@@ -64,10 +64,14 @@ export async function GET(request: NextRequest) {
     },
   });
 
-  console.log(deleteLink);
+  const links = await db.link.findMany();
 
   return new Response(
-    JSON.stringify({ error: "", success: "Successfully removed link" }),
+    JSON.stringify({
+      links: links,
+      error: "",
+      success: "Successfully removed link",
+    }),
     {
       headers: { "Content-Type": "application/json" },
       status: 200,
