@@ -11,6 +11,10 @@ Features
 - Prisma database for storing product information.
 - A clean frontend where I can quickly see if my size is available — without having to open the slow webshop.
 
+## Techniques used
+
+**[![My Skills](https://skillicons.dev/icons?i=nextjs,prisma,tailwind,ts)](https://skillicons.dev)**
+
 ## Run for local development
 
 Development server:
